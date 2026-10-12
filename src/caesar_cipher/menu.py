@@ -5,19 +5,19 @@ class Menu:
     @staticmethod
     def show() -> None:
         options = [
-            "1. Wczytaj dane z pliku do bufora",
-            "2. Zapisz dane z bufora do pliku",
-            "3. Wyczyść bufor",
-            "4. Pokaz zawartość bufora",
-            "5. Zaszyfruj dane ROT13",
-            "6. Odszyfruj dane ROT13",
-            "7. Zaszyfruj dane ROT47",
-            "8. Odszyfruj dane ROT47",
-            "9. Zakończ",
+            "Load data from file to buffer",
+            "Save data from buffer to file",
+            "Clear buffer",
+            "Show buffer data",
+            "Encode ROT13",
+            "Decode ROT13",
+            "Encode ROT47",
+            "Decode ROT47",
+            "Exit",
         ]
 
-        for option in options:
-            print(option)
+        for i, option in enumerate(options):
+            print(f"{i}. {option}")
 
     @staticmethod
     def get_choice() -> str:
@@ -31,6 +31,7 @@ class Menu:
     @staticmethod
     def ask_for_output_path() -> Path:
         path = Path(input("Insert output file path: "))
+        return path
 
     @staticmethod
     def insert_text() -> str:
