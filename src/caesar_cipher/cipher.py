@@ -18,3 +18,18 @@ class Cipher:
     @staticmethod
     def decode_rot13(text: str) -> str:
         return Cipher.encode_rot13(text)
+
+    @staticmethod
+    def encode_rot47(text: str) -> str:
+        encode_message = ""
+        for char in text:
+            if 33 <= ord(char) <= 126:
+                encode_message += chr(33 + (ord(char) - 33 + ROT_TYPE__47) % 94)
+            else:
+                encode_message += char
+
+        return encode_message
+
+    @staticmethod
+    def decode_rot(text: str) -> str:
+        return Cipher.encode_rot47(text)
