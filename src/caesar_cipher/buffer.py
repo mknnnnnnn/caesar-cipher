@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 
 
 @dataclass
@@ -28,3 +28,6 @@ class Buffer:
     def show(self) -> None:
         for element in self.__data:
             print(element)
+
+    def to_dict(self):
+        return [asdict(data) for data in self.__data]
