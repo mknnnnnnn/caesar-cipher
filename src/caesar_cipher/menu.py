@@ -9,14 +9,12 @@ class Menu:
             "Save data from buffer to file",
             "Clear buffer",
             "Show buffer data",
-            "Encode ROT13",
-            "Decode ROT13",
-            "Encode ROT47",
-            "Decode ROT47",
+            "ROT13",
+            "ROT47",
             "Exit",
         ]
 
-        for i, option in enumerate(options):
+        for i, option in enumerate(options, start=1):
             print(f"{i}. {option}")
 
     @staticmethod
@@ -36,3 +34,15 @@ class Menu:
     @staticmethod
     def insert_text() -> str:
         return input("Insert text to encode: ")
+
+    @staticmethod
+    def show_rot_options() -> None:
+        rot_options = [
+            "Encode text and add to buffer",
+            "Decode text and add to buffer",
+            "Encode everything in buffer",
+            "Decode everything in buffer",
+        ]
+
+        for i, option in enumerate(rot_options, start=1):
+            print(f"{i}. {option}")
