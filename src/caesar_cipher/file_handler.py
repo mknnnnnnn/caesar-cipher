@@ -24,7 +24,8 @@ class FileHandler:
                     data = json.load(file)
                 return data
             else:
-                return []
+                with open(self.path, "w") as file:
+                    json.dump([], file)
         except PermissionError as e:
             raise e("Permission error")
         except json.JSONDecodeError as e:
