@@ -1,8 +1,9 @@
 import sys
-from menu import Menu
+
 from buffer import Buffer, Text
-from file_handler import FileHandler
 from cipher import Cipher
+from file_handler import FileHandler
+from menu import Menu
 
 
 class Manager:
@@ -17,12 +18,14 @@ class Manager:
             "5": self.rot_13,
             "7": self.exit,
         }
-        self.rot_options = {
+        self.rot13_options = {
             "1": self.encode_single_text_rot13,
             "2": self.decode_single_text_rot13,
             "3": self.encode_whole_buffer_rot13,
             "4": self.decode_whole_buffer_rot13,
         }
+
+        self.rot47_options = {}
 
     def options(self) -> None:
         while True:
@@ -72,7 +75,7 @@ class Manager:
         text = Text(result, 13, False)
         self.buffer.add(text)
 
-    def encode_whole_buffer_rot13(self) -> None:
+    def encode_whole_buffer_rot13(self, operation: bool = True) -> None:
         for i, data in enumerate(self.buffer.data):
             if not data.encrypted and data.rot_type == 13:
                 text = Cipher.encode_rot13(data)

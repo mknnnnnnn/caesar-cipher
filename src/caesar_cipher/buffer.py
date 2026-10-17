@@ -1,4 +1,4 @@
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
 
 
 @dataclass
@@ -6,6 +6,9 @@ class Text:
     text: str
     rot_type: int
     encrypted: bool
+
+    def __str__(self):
+        pass
 
 
 class Buffer:
@@ -29,5 +32,5 @@ class Buffer:
         for element in self.__data:
             print(element)
 
-    def to_dict(self):
+    def to_dict(self) -> list[dict[str, str | int | bool]]:
         return [asdict(data) for data in self.__data]
