@@ -8,7 +8,7 @@ class Text:
     encrypted: bool
 
     def __str__(self):
-        pass
+        return f"Text: {self.text}, ROT: {self.rot_type}, Encrypted: {self.encrypted}"
 
 
 class Buffer:
