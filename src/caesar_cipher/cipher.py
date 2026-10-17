@@ -58,12 +58,12 @@ class ROT47(Cipher):
 
 
 class CipherFactory:
-    _ciphers: ClassVar[dict[str, type[Cipher]]] = {"rot13": ROT13, "rot47": ROT47}
+    _ciphers: ClassVar[dict[int, type[Cipher]]] = {13: ROT13, 47: ROT47}
 
     @classmethod
-    def create(cls, name: str) -> Cipher:
-        cipher_class = cls._ciphers.get(name.lower())
+    def create(cls, rot_type: int) -> Cipher:
+        cipher_class = cls._ciphers.get(rot_type)
         if cipher_class is None:
-            available = ", ".join(cls._ciphers)
-            raise ValueError(f"Unknown cipher '{name}'. Available: {available}")
+            available = ", ".join(map(str, cls._ciphers))
+            raise ValueError(f"Unknown cipher '{rot_type}'. Available: {available}")
         return cipher_class()
