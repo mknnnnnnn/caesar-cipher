@@ -12,11 +12,11 @@ class Text:
 
 
 class Buffer:
-    def __init__(self):
+    def __init__(self) -> None:
         self.__data: list[Text] = []
 
     @property
-    def data(self):
+    def data(self) -> list[Text]:
         return self.__data
 
     def add(self, text: Text) -> None:

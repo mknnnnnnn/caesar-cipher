@@ -1,4 +1,5 @@
 import sys
+from collections.abc import Callable
 
 from buffer import Buffer, Text
 from cipher import CipherFactory
@@ -10,7 +11,7 @@ class Manager:
     def __init__(self, buffer: Buffer):
         self.buffer = buffer
         self.extend_dict = False
-        self.options = {
+        self.options: dict[str, Callable] = {
             "1": self.load_to_buffer_from_file,
             "2": self.save_to_file_from_buffer,
             "3": self.clear_buffer,
@@ -28,7 +29,7 @@ class Manager:
                 print(f"Invalid choice {choice}")
                 continue
 
-            self.options.get(choice)()
+            self.options[choice]()
 
     def load_to_buffer_from_file(self) -> None:
         path = Menu.ask_for_input_path()
@@ -83,7 +84,7 @@ class Manager:
 
     def rot(self, rot_type: int) -> None:
 
-        options = {
+        options: dict[str, Callable] = {
             "1": lambda: self.single_text_rot(rot_type, True),
             "2": lambda: self.single_text_rot(rot_type, False),
             "3": lambda: self.whole_buffer_rot(rot_type, True),
@@ -95,7 +96,7 @@ class Manager:
         if choice not in options:
             print("Choose correct choice")
 
-        options.get(choice)()
+        options[choice]()
 
     def exit(self):
         sys.exit()
