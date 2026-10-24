@@ -1,0 +1,65 @@
+name: CI
+
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.14.9"
+      - name: Install Dependencies
+
+        run:
+          |
+          pip install -r requirements.txt
+          pip install ruff bandit safety mypy
+
+      - name: ruff format check
+        run: ruff format --check src/
+      - name: ruff lint check
+        run: ruff check src/
+      - name: bandit check
+        run: bandit src/
+      - name: mypy check
+
+        run: mypy src/
+
+      - name: safety check
+        run: safety check
+        continue-on-error: true
+
+  test:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.14.9"
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pytest
+      - name: Run ubuntu
+        run: pytest --cov=src --cov-report=xml --cov-report=term-missing
+
+      # - name: Upload coverage to Codecov
+      #   uses: codecov/codecov-action@v4
+      #   with:
+      #     file: ./coverage.xml
+      #     flags: unittests
+
+
+
+
+
+
