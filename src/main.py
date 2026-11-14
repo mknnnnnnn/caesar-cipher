@@ -1,7 +1,7 @@
 import sys
 
-from buffer import Buffer
-from manager import Manager
+from .caesar_cipher.buffer import Buffer
+from .caesar_cipher.manager import Manager
 
 
 def main():

@@ -1,10 +1,10 @@
 import sys
 from collections.abc import Callable
 
-from buffer import Buffer, Text
-from cipher import CipherFactory
-from file_handler import FileHandler
-from menu import Menu
+from .buffer import Buffer, Text
+from .cipher import CipherFactory
+from .file_handler import FileHandler
+from .menu import Menu
 
 
 class Manager:
